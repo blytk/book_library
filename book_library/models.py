@@ -17,7 +17,12 @@ class Book(models.Model):
         MINDSET = 6
         OTHER = 7
     genre = models.IntegerField(choices=Genre.choices)
+
+
+    def __str__(self):
+        return self.title
     
+
     def serialize(self):
         return {
             "id": self.id,
@@ -32,6 +37,10 @@ class Note(models.Model):
     book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="note_book")
     text = models.TextField(blank=False, null=False, max_length=512)
     # main = models.BooleanField(blank=False, null=False, default=False)
+
+
+    def __str__(self):
+        return f"User: {self.user}, Book: {self.book}"
     
 
     def serialize(self):
@@ -52,6 +61,10 @@ class Why(models.Model):
     recommend = models.BooleanField(blank=True, null=True)
 
 
+    def __str__(self):
+        return f"User: {self.user}, Book: {self.book}"
+
+
     def serialize(self):
         return {
             "id": self.id,
@@ -65,3 +78,34 @@ class Why(models.Model):
 class Read(models.Model):
     user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE, related_name="read_user")
     book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="read_book")
+
+
+    def __str__(self):
+        return f"User: {self.user}, Book: {self.book}"
+    
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user,
+            "book": self.book
+        }
+
+
+class Wish(models.Model):
+    user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE, related_name="wish_user")
+    book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="wish_book")
+
+
+    def __str__(self):
+        return {
+            f"User: {self.user}, Book: {self.book}"
+        }
+    
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user,
+            "book": self.book
+        }
