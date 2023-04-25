@@ -12,10 +12,13 @@
     <body>
         
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container">
+                <div class="container-fluid">
                     <a class="navbar-brand" href="#">Book Library</a>
                     <div>
                         <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">BOOKS</a>
+                            </li>
                             {% if request.user.is_authenticated %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="#"><strong>{{ request.user }}</strong></a>

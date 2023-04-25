@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 # from django.core.paginator import Paginator
 
 ## Import models
-from .models import User, Book, Note, Why, Read
+from .models import User, Book, Note, Why, Reading, Read, Wish
 
 # Create your views here.
 
@@ -72,4 +72,9 @@ def register(request):
 
 
 def index(request):
+    return render(request, "book_library/index.html")
+
+
+def reading(request):
+    # I need to get the books for the logged in user
     return render(request, "book_library/index.html")

@@ -75,6 +75,23 @@ class Why(models.Model):
         }
 
 
+class Reading(models.Model):
+    user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE, related_name="reading_user")
+    book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="reading_book")
+
+
+    def __str__(self):
+        return f"User: {self.user}, Book: {self.book}"
+    
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user,
+            "book": self.book
+        }
+
+
 class Read(models.Model):
     user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE, related_name="read_user")
     book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="read_book")
