@@ -52,13 +52,18 @@ class Note(models.Model):
             # "main": self.main,
         }
 
-
+'''
 class Why(models.Model):
     user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE, related_name="why_user")
     book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="why_book")
     why = models.TextField(blank=True, null=True, max_length=1024)
     started_reading = models.DateField(blank=True, null=True)
     recommend = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'book'], name='one why per user/book')
+        ]
 
 
     def __str__(self):
@@ -73,11 +78,20 @@ class Why(models.Model):
             "why": self.why,
             "started_reading": self.started_reading
         }
+'''
 
 
 class Reading(models.Model):
     user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE, related_name="reading_user")
     book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="reading_book")
+    why = models.TextField(blank=True, null=True, max_length=1024)
+    started_reading = models.DateField(blank=True, null=True)
+    recommend = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'book'], name='one why per user/book reading')
+        ]
 
 
     def __str__(self):
@@ -95,6 +109,14 @@ class Reading(models.Model):
 class Read(models.Model):
     user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE, related_name="read_user")
     book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="read_book")
+    why = models.TextField(blank=True, null=True, max_length=1024)
+    started_reading = models.DateField(blank=True, null=True)
+    recommend = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'book'], name='one why per user/book read')
+        ]
 
 
     def __str__(self):
@@ -112,12 +134,18 @@ class Read(models.Model):
 class Wish(models.Model):
     user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE, related_name="wish_user")
     book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="wish_book")
+    why = models.TextField(blank=True, null=True, max_length=1024)
+    recommend = models.BooleanField(blank=True, null=True)
+
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'book'], name='one why per user/book wish')
+        ]
 
 
     def __str__(self):
-        return {
-            f"User: {self.user}, Book: {self.book}"
-        }
+        return f"User: {self.user}, Book: {self.book}"
     
 
     def serialize(self):

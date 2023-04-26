@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body %}
-<div id="reading-view">
+<div id="read-view">
     <div class="container-fluid">
         <h1>Currently Reading Books</h1>
     </div>
@@ -13,22 +13,15 @@
             <div class="col started-col"><h3>Started Reading</h3></div>
             <div class="col why-col"><h3>Why did you start reading it?</h3></div>
         </div>
-        {% for reading_object in reading_objects %}
+        {% for read_object in read_objects %}
         <div class="row">
-            <div class="col title-col">{{ reading_object.book.title }}</div>
-            <div class="col author-col">{{ reading_object.book.author }}</div>
-            <div class="col started-col">{{ reading_object.started_reading }}</div>
-            <div class="col why-col">{{ reading_object.why }}</div>
+            <div class="col title-col">{{ read_object.book.title }}</div>
+            <div class="col author-col">{{ read_object.book.author }}</div>
+            <div class="col started-col">{{ read_object.started_reading }}</div>
+            <div class="col why-col">{{ read_object.why }}</div>
         </div>
         {% endfor %}
-    </div>
-    
+    </div>    
 </div>
 
-<div id="read-view">
-</div>
-
-<div id="wish_list-view">
-</div>
 {% endblock %}
-

@@ -1,0 +1,12 @@
+{% extends "book_library/layout.html" %}
+
+{% block body %}
+<div class="container" id="allbooks-div">
+    <ul>
+        {% for book in all_books %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

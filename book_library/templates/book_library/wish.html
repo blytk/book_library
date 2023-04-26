@@ -1,0 +1,25 @@
+{% extends 'book_library/layout.html' %}
+{% load static %}
+
+{% block body %}
+<div id="wish-view">
+    <div class="container-fluid">
+        <h1>Currently Reading Books</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col title-col"><h3>Title</h3></div>
+            <div class="col author-col"><h3>Author</h3></div>
+            <div class="col why-col"><h3>Why?</h3></div>
+        </div>
+        {% for wish_object in wish_objects %}
+        <div class="row">
+            <div class="col title-col">{{ wish_object.book.title }}</div>
+            <div class="col author-col">{{ wish_object.book.author }}</div>
+            <div class="col why-col">{{ wish_object.why }}</div>
+        </div>
+        {% endfor %}
+    </div>    
+</div>
+
+{% endblock %}

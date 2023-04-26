@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,7 +18,7 @@
                     <div>
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">BOOKS</a>
+                                <a class="nav-link" href="{% url 'book_library:my_books' %}">BOOKS</a>
                             </li>
                             {% if request.user.is_authenticated %}
                                 <li class="nav-item">
@@ -25,13 +26,13 @@
                                 </li>
                             {% endif %}
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Reading</a>
+                                <a class="nav-link" href="{% url 'book_library:reading' %}">Reading</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Read</a>
+                                <a class="nav-link" href="{% url 'book_library:read' %}">Read</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Wish List</a>
+                                <a class="nav-link" href="{% url 'book_library:wish' %}">Wish List</a>
                             </li>
                             {% if request.user.is_authenticated %}
                             <li class="nav-item">
