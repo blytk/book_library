@@ -1,5 +1,18 @@
 
+.selected {
+    background-color: rgb(36, 187, 137);
+}
 
 #allbooks-div {
-    overflow: scroll;
+    height: 400px;
+    overflow-y: scroll;
 }
+
+#add-new-book-button {
+    margin-top: 10px;
+}
+
+#alert {
+    display: none;
+}
+

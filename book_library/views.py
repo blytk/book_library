@@ -1,14 +1,23 @@
+# Json stuff
+import json
+from django.http import JsonResponse
+#
+from django.forms import ModelForm
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 ## In case I need pagination
 # from django.core.paginator import Paginator
 
 ## Import models
 from .models import User, Book, Note, Reading, Read, Wish
+
+# Import forms
+from .forms import NewBookForm
 
 # Create your views here.
 
@@ -115,3 +124,72 @@ def my_books(request):
         return render(request, "book_library/my_books.html", context)
     else:
         return HttpResponseRedirect(reverse("book_library:login"))
+
+
+
+#### ADD NEW BOOK
+
+def new_book(request):
+        # Create new book element
+        form = NewBookForm()
+        context = {'form': form}
+        if request.method == "POST":
+            form = NewBookForm(request.POST)
+            if form.is_valid(): 
+                form.save()
+                message = "Book added successfully"
+                context = {'form': form, 'message': message}
+                return render(request, "book_library/new_book.html", context)
+                # return HttpResponseRedirect(reverse("book_library:new_book"))
+        else:
+            return render(request, "book_library/new_book.html", context)
+
+    
+
+# I am going to make three different functions, one for each list, after they are done, I will unify them in a single function, using list (to what list we add) as
+# a third argument
+
+###### ADD BOOKS TO LISTS VIEWS ######### (reading, read, wish) (this is going to be used through JS in the app)
+@csrf_exempt
+def add_to_reading_list(request, book_id, reading_list):
+    if request.method == "POST":
+    # I have to somehow capture the book from the list
+        # Maybe capture the book id when clicking on it, storing this value somewhere and then passing the value (book_id)?
+        # This is JS stuff anyway
+        try:
+            book = Book.objects.get(pk=book_id)
+        except Book.DoesNotExist:
+            return JsonResponse(status=400)
+    # I have to create a new object Reading.object and add the relevant data to the fields
+        new_entry = Reading()
+        new_entry.user = request.user
+        new_entry.book = book
+        try:
+            new_entry.save()
+        except:
+            return JsonResponse({"message": "Error adding book to the list"})
+        
+        return JsonResponse({"message": "Book added successfully."})
+    else:
+        return JsonResponse({"message": "Only POST requests allowed"})
+
+
+def add_to_read_list(request, book_id):
+    pass
+
+
+def add_to_wish_list(request, book_id):
+    pass
+
+
+###### REMOVE BOOKS FROM LISTS VIEWS ######### (reading, read, wish) (this is going to be used through JS in the app)
+def remove_from_reading_list(request, book_id):
+    pass
+
+
+def remove_from_read_list(request, book_id):
+    pass
+
+
+def remove_from_wish_list(request, book_id):
+    pass

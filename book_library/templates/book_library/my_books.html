@@ -1,12 +1,52 @@
 {% extends "book_library/layout.html" %}
+{% load static %}
 
 {% block body %}
-<div class="container" id="allbooks-div">
-    <ul>
-        {% for book in all_books %}
-            <li>{{ book.title }}</li>
-        {% endfor %}
-    </ul>
+<div class="container">
+    <div class="row">
+        <!-- Left side -->
+        <div class="col">
+            <div class="container" id="search-bar-div">
+                <input type="text" placeholder="Search">
+                <button class="btn btn-outline-dark" id="search-button">Search</button>
+            </div>
+            
+            <div class="container" id="allbooks-div">
+                <ul>
+                    {% for book in all_books %}
+                        <li id="{{ book.id }}">{{ book.title }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>        
+        <!-- Right side -->
+        <div class="col">
+            <div class="container">
+                <ul>
+                    <li><button class="btn btn-outline-secondary" id="add-to-reading-button">Add book to reading list</button></li>
+                    <li><button class="btn btn-outline-secondary" id="add-to-read-button">Add book to read list</button></li>
+                    <li><button class="btn btn-outline-secondary" id="add-to-wish-button">Add book to wish list</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form action="{% url 'book_library:new_book' %}">
+                <button class="btn btn-outline-success">Add new book</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="alert alert-success" id="alert" role="alert">
+            
+        </div>
+    </div>
 </div>
+{% endblock %}
 
+{% block script %}
+    <script src="{% static 'book_library/my_books.js' %}">
+
+    </script>
 {% endblock %}

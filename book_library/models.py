@@ -18,6 +18,11 @@ class Book(models.Model):
         OTHER = 7
     genre = models.IntegerField(choices=Genre.choices)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['title', 'author'], name='one unique title per author')
+        ]
+
 
     def __str__(self):
         return self.title
