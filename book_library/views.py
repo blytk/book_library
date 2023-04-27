@@ -139,8 +139,8 @@ def new_book(request):
                 form.save()
                 message = "Book added successfully"
                 context = {'form': form, 'message': message}
-                return render(request, "book_library/new_book.html", context)
-                # return HttpResponseRedirect(reverse("book_library:new_book"))
+                # return render(request, "book_library/new_book.html", context)
+                return HttpResponseRedirect(reverse("book_library:new_book"))
         else:
             return render(request, "book_library/new_book.html", context)
 
@@ -151,19 +151,28 @@ def new_book(request):
 
 ###### ADD BOOKS TO LISTS VIEWS ######### (reading, read, wish) (this is going to be used through JS in the app)
 @csrf_exempt
-def add_to_reading_list(request, book_id, reading_list):
+def add_to_list(request, book_id, what_list):
     if request.method == "POST":
-    # I have to somehow capture the book from the list
-        # Maybe capture the book id when clicking on it, storing this value somewhere and then passing the value (book_id)?
-        # This is JS stuff anyway
+    # I have to somehow capture the book from the list        
         try:
             book = Book.objects.get(pk=book_id)
         except Book.DoesNotExist:
             return JsonResponse(status=400)
     # I have to create a new object Reading.object and add the relevant data to the fields
-        new_entry = Reading()
+    # Check to what list we want to add a book (reading, read or wish)
+        if what_list == "reading_list":
+            new_entry = Reading()
+            
+        elif what_list == "read_list":
+            new_entry = Read()
+            
+        elif what_list == "wish_list":
+            new_entry = Wish()
+
         new_entry.user = request.user
-        new_entry.book = book
+        new_entry.book = book    
+            
+        
         try:
             new_entry.save()
         except:
@@ -174,22 +183,9 @@ def add_to_reading_list(request, book_id, reading_list):
         return JsonResponse({"message": "Only POST requests allowed"})
 
 
-def add_to_read_list(request, book_id):
-    pass
-
-
-def add_to_wish_list(request, book_id):
-    pass
-
-
 ###### REMOVE BOOKS FROM LISTS VIEWS ######### (reading, read, wish) (this is going to be used through JS in the app)
-def remove_from_reading_list(request, book_id):
+def remove_from_list(request, book_id, what_list):
     pass
 
 
-def remove_from_read_list(request, book_id):
-    pass
 
-
-def remove_from_wish_list(request, book_id):
-    pass

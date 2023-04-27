@@ -2,11 +2,15 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#add-to-reading-button').addEventListener('click', function() {
         book_id_to_send = clickedLi;
         // I need to post the url "my_books/add_to_reading_list/<int:book_id>" that will trigger the view add_to_reading_list(request, book_id)
-        fetch(`add_to_reading_list/${book_id_to_send}`, {
-            method: 'POST'
+        fetch(`add_to_list/${book_id_to_send}/reading_list`, {
+            method: 'POST',
         })
-        document.querySelector('#alert').innerHTML = "Book successfully added to reading list"
-        document.querySelector('#alert').style.display = "block"
+        message = document.querySelector('#alert')
+        message.innerHTML = "Book successfully added to reading list"
+        message.className = ""
+        message.classList.add("alert")
+        message.classList.add("alert-success")
+        message.style.display = "block"
 
         
         // add to reading button function
@@ -16,9 +20,35 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.querySelector('#add-to-read-button').addEventListener('click', function() {
         //add to read button function
+        book_id_to_send = clickedLi;
+        fetch(`add_to_list/${book_id_to_send}/read_list`, {
+            method: 'POST',
+        })
+
+        message = document.querySelector('#alert')
+        message.innerHTML = "Book successfully added to read list"
+        message.className = ""
+        message.classList.add("alert")
+        message.classList.add("alert-primary")
+        message.style.display = "block"
+        
+        
+
+        
     });
     document.querySelector('#add-to-wish-button').addEventListener('click', function() {
         //add to wish button function
+        book_id_to_send = clickedLi;
+        fetch(`add_to_list/${book_id_to_send}/wish_list`, {
+            method: 'POST',
+        })
+
+        message = document.querySelector('#alert')
+        message.innerHTML = "Book successfully added to wish list"
+        message.className = ""
+        message.classList.add("alert")
+        message.classList.add("alert-info")
+        message.style.display = "block"
     });
 
     // I want to make the li items "selectable", visually and to grab it's id to pass onto the list
