@@ -119,7 +119,7 @@ def wish_list(request):
 
 def my_books(request):
     if request.user.is_authenticated:
-        all_books = Book.objects.all()
+        all_books = Book.objects.all().order_by("title")
         context = {"all_books": all_books}
         return render(request, "book_library/my_books.html", context)
     else:
@@ -187,5 +187,15 @@ def add_to_list(request, book_id, what_list):
 def remove_from_list(request, book_id, what_list):
     pass
 
+
+### DETAIL VIEW 
+def detail_view(request, user_id, book_id):
+    # We get the user we what (from url) and the book we want (from url too)
+    current_user = User.objects.get(id=user_id)
+    current_book = Book.objects.get(id=book_id)
+    # Get all the notes the one user has for the one book
+    notes = Note.objects.filter(book=current_book, user=current_user)
+    context = {'current_user': current_user, 'current_book': current_book, 'notes': notes}
+    return render(request, "book_library/detail_view.html", context)
 
 

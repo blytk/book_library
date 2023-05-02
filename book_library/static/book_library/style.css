@@ -1,3 +1,10 @@
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
 
 .selected {
     background-color: rgb(36, 187, 137);

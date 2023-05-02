@@ -4,7 +4,7 @@
 {% block body %}
 <div id="wish-view">
     <div class="container-fluid">
-        <h1>Currently Reading Books</h1>
+        <h1>Books that you want to read</h1>
     </div>
     <div class="container-fluid">
         <div class="row">
@@ -14,7 +14,7 @@
         </div>
         {% for wish_object in wish_objects %}
         <div class="row">
-            <div class="col title-col">{{ wish_object.book.title }}</div>
+            <div class="col title-col"><a href="{% url 'book_library:detail_view' request.user.id wish_object.book.id %}">{{ wish_object.book.title }}</a></div>
             <div class="col author-col">{{ wish_object.book.author }}</div>
             <div class="col why-col">{{ wish_object.why }}</div>
         </div>

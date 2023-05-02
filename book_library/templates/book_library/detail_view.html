@@ -1,0 +1,30 @@
+{% extends "book_library/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>{{ current_book.title }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Notes from {{ current_user.username }}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul>
+            {% for note in notes %}
+                <li>{{ note.text }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}

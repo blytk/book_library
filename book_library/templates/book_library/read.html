@@ -4,21 +4,21 @@
 {% block body %}
 <div id="read-view">
     <div class="container-fluid">
-        <h1>Currently Reading Books</h1>
+        <h1>Already Read Books</h1>
     </div>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col title-col"><h3>Title</h3></div>
-            <div class="col author-col"><h3>Author</h3></div>
-            <div class="col started-col"><h3>Started Reading</h3></div>
-            <div class="col why-col"><h3>Why did you start reading it?</h3></div>
+        <div class="row">            
+                <div class="col title-col"><h3>Title</h3></div>
+                <div class="col author-col"><h3>Author</h3></div>
+                <div class="col started-col"><h3>Started Reading</h3></div>
+                <div class="col why-col"><h3>Why did you start reading it?</h3></div>            
         </div>
         {% for read_object in read_objects %}
-        <div class="row">
-            <div class="col title-col">{{ read_object.book.title }}</div>
-            <div class="col author-col">{{ read_object.book.author }}</div>
-            <div class="col started-col">{{ read_object.started_reading }}</div>
-            <div class="col why-col">{{ read_object.why }}</div>
+        <div class="row">            
+                <div class="col title-col"><a href="{% url 'book_library:detail_view' request.user.id read_object.book.id %}">{{ read_object.book.title }}</a></div>
+                <div class="col author-col">{{ read_object.book.author }}</div>
+                <div class="col started-col">{{ read_object.started_reading }}</div>
+                <div class="col why-col">{{ read_object.why }}</div>
         </div>
         {% endfor %}
     </div>    

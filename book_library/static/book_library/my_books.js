@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // I don't know how to make only one item selectable simultaneously. Maybe I make it work as a list? Better experience actually
     // I am going to get started with just one item selected, as the view function expects a single book id
     // I might review later to see if I can make it work with a list and it's better overall
-    let items = document.querySelectorAll('#allbooks-div li')
+    let all_books_li = document.querySelectorAll('#allbooks-div li')
     selected = 0
-    items.forEach(li => {
+    all_books_li.forEach(li => {
         li.addEventListener('click', () => {
             if (selected === 0) {
                 li.classList.toggle('selected');
@@ -69,4 +69,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }) 
     });
+
+    // Functionality for the search bar, every time we press a key, on the way up, we capture the value of the current input (string)
+    // We need to compare the value of the input field (search) and get the books that include that search string
+    // I have already all the books in HTML displaying on the page...
+    /*
+    document.querySelector('#search').addEventListener('keyup', (e) => {
+        searchString = e.target.value
+        searchString = searchString.toLowerCase()
+        filteredBooks = all_books_li.forEach(li => {
+            title = li.innerHTML
+            title = title.toLowerCase()
+            if (!title.includes(searchString)) {
+                console.log(searchString)
+                li.classList.toggle('hidden')
+            }
+        })
+        // Get all the HTML li's and only display the appropriate ones
+    })
+    */
+   document.querySelector('#search').addEventListener('keyup', filter);
 })
+
+
+// Search bar filter functionality
+function filter() {
+    // Capture the value of the search bar (what is currently entered in the search box)
+    searchValue = document.querySelector('#search').value;
+    searchValue = searchValue.toLowerCase();
+    
+    // Capture all the li from the menu
+    all_books = document.querySelectorAll('#menu li');
+    all_books.forEach(li => {
+        title = li.innerHTML;
+        title = title.toLowerCase();
+        // Check for each book, if the search value is included in the title of the book
+        if (title.includes(searchValue)) {
+            li.classList.add('visible');
+            li.classList.remove('hidden');
+        } else {
+            li.classList.add('hidden');
+            li.classList.remove('visible');
+        }
+    })
+};

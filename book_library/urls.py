@@ -16,9 +16,10 @@ urlpatterns = [
     path("my_books/", views.my_books, name="my_books"),
     # add books to reading, read or wish paths
     path("my_books/add_to_list/<int:book_id>/<str:what_list>", views.add_to_list, name="add_to_list"),
-    # delete books from reading, read or wish paths
-    path("my_books/remove_from_reading_list/<int:book_id>", views.remove_from_list, name="remove_from_list"),
+    # delete books from reading, read or wish paths 
+    # I need to think about this, where to remove from. Probably a good idea to make a "see all my reading books, read books, wish books, and allow to remove from there"
+    # path("my_books/remove_from_reading_list/<int:book_id>", views.remove_from_list, name="remove_from_list"),
     # new book form 
     path("new_book/", views.new_book, name="new_book"),
-    #path("add_new_book/", views.new_book, name="add_new_book"),
+    path("detail_view/<int:user_id>/<int:book_id>", views.detail_view, name="detail_view"),
 ]

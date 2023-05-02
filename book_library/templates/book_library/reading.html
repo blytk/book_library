@@ -15,7 +15,8 @@
         </div>
         {% for reading_object in reading_objects %}
         <div class="row">
-            <div class="col title-col">{{ reading_object.book.title }}</div>
+            
+            <div class="col title-col"><a href="{% url 'book_library:detail_view' request.user.id reading_object.book.id %}">{{ reading_object.book.title }}</a></div>
             <div class="col author-col">{{ reading_object.book.author }}</div>
             <div class="col started-col">{{ reading_object.started_reading }}</div>
             <div class="col why-col">{{ reading_object.why }}</div>
