@@ -1,0 +1,22 @@
+{% extends "book_library/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Books by {{ author_name }}</h1>
+        </div>
+    </div>
+    
+    <ul>
+        <div class="row">
+            <div class="col">
+                {% for book in books_by_author %}
+                    <li class="book-row"><a href="{% url 'book_library:detail_view' request.user.id book.id %}">{{ book.title }}</a></li>
+                {% endfor %}
+            </div>
+        </div>
+    </ul>
+</div>
+{% endblock %}

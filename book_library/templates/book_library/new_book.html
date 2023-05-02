@@ -2,18 +2,25 @@
 {% load static %}
 
 {% block body %}
-
 <div class="container" id="new-book-form">
     <form action="{% url 'book_library:new_book' %}" method="post">
         {% csrf_token %}
         <div class="row">
             <div class="col">
-                {{ form }}
+                {{ form.as_div }}
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <button class="btn btn-outline-dark" id="add-new-book-button" type="submit">Add new book</button>
+                    <button class="btn btn-outline-dark btn-block" id="add-new-book-button" type="submit">Add new book</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <a href="{% url 'book_library:my_books' %}">>> Return to My Books</a>
+                </div>
+                
             </div>
         </div>
     </form>
@@ -25,6 +32,5 @@
     </div>
     {% endif %}
 </div>
-
-
 {% endblock %}
+

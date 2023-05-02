@@ -120,10 +120,42 @@ def wish_list(request):
 def my_books(request):
     if request.user.is_authenticated:
         all_books = Book.objects.all().order_by("title")
-        context = {"all_books": all_books}
+        reading_books = Reading.objects.filter(user=request.user)
+        read_books = Read.objects.filter(user=request.user)
+        wish_books = Wish.objects.filter(user=request.user)
+
+        context = {"all_books": all_books, "reading_books": reading_books, "read_books": read_books, "wish_books": wish_books}
         return render(request, "book_library/my_books.html", context)
     else:
         return HttpResponseRedirect(reverse("book_library:login"))
+
+
+def user_list_of_books(request, what_list):
+    print(what_list)
+    if what_list == "all_books":
+        user_list_of_books = Book.objects.all().order_by("title")
+    elif what_list == "reading_books":
+        user_list_of_books = Reading.objects.filter(user=request.user)
+    elif what_list == "read_books":
+        user_list_of_books = Read.objects.filter(user=request.user)
+    elif what_list == "wish_books":
+        user_list_of_books = Wish.objects.filter(user=request.user)
+    
+    context = {"user_list_of_books": user_list_of_books, "what_list": what_list}
+    return render(request, "book_library/user_list_of_books.html", context)
+
+
+def author_view(request, author_name):
+    books_by_author = Book.objects.filter(author=author_name).order_by("title")
+    context = {"books_by_author": books_by_author, "author_name": author_name}
+    return render(request, "book_library/author_view.html", context)
+
+
+def genre_view(request, genre):
+    books_by_genre = Book.objects.filter(genre=genre).order_by("title")
+    erst = books_by_genre[0]
+    context = {"books_by_genre": books_by_genre, "erst": erst}
+    return render(request, "book_library/genre_view.html", context)
 
 
 

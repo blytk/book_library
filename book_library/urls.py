@@ -22,4 +22,9 @@ urlpatterns = [
     # new book form 
     path("new_book/", views.new_book, name="new_book"),
     path("detail_view/<int:user_id>/<int:book_id>", views.detail_view, name="detail_view"),
+    path("user_list_of_books/<str:what_list>", views.user_list_of_books, name="user_list_of_books"),
+    path("author_view/<str:author_name>", views.author_view, name="author_view"),
+    path("genre_view/<int:genre>", views.genre_view, name="genre_view"),
+
+
 ]

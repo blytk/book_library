@@ -1,10 +1,26 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container > * {
+    margin: 10px;
+}
+
 .hidden {
     display: none;
 }
 
 .my-books-list {
-    height: 600px;
+    height: 400px;
+    margin-bottom: 25px;
+    margin-top: 25px;
     overflow-y: scroll;
+}
+
+.not-all-books-list {
+    margin-top: 0px;
 }
 
 .visible {
@@ -23,3 +39,10 @@
     display: none;
 }
 
+#new-book-form {
+    padding-left: 0px;
+}
+
+#search {
+    height: 40.333px;
+}
