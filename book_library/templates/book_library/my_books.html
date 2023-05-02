@@ -2,13 +2,15 @@
 {% load static %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid">
+    <!-- Row 1 -->
     <div class="row">
-        <!-- Left side -->
+        <!-- All books column (col1/4) -->
         <div class="col">
             <div class="row">
                 <div class="col">
                     <div class="container">
+                        <h2>All books</h2>
                         <input type="search" id="search"> 
                         <button class="btn btn-outline-dark" id="search-button">Search</button>
                     </div>
@@ -16,7 +18,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="container" id="allbooks-div">
+                    <div class="container my-books-list" id="allbooks-div">
                         <ul id="menu">
                             {% for book in all_books %}
                                 <li id="{{ book.id }}">{{ book.title }}</li>
@@ -25,29 +27,72 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col">
                     <form action="{% url 'book_library:new_book' %}">
                         <button class="btn btn-outline-success">Add new book</button>
                     </form>
                 </div>
-            </div>
-            
+            </div> 
         </div>        
-        <!-- Right side -->
+
+        <!-- Reading List Column (col2/4) -->
         <div class="col">
             <div class="row">
-                <div class="container">
-                    <ul>
-                        <li><button class="btn btn-outline-secondary" id="add-to-reading-button">Add book to reading list</button></li>
-                        <li><button class="btn btn-outline-secondary" id="add-to-read-button">Add book to read list</button></li>
-                        <li><button class="btn btn-outline-secondary" id="add-to-wish-button">Add book to wish list</button></li>
-                    </ul>
+                <div class="col">
+                    <div class="container my-books-list" id="readingbooks-div">
+                        <h2>Reading Books</h2>
+                        <ul id="readingbooksmenu">    
+                        </ul>              
+                    </div>
+                </div>      
+            </div>    
+            <div class="row">
+                <div class="col">
+                    <li><button class="btn btn-outline-secondary" id="add-to-reading-button">Add book to reading list</button></li> 
                 </div>
-            </div>      
+            </div>
         </div>
+        <!-- Read List Column (col3/4)-->
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <div class="container my-books-list" id="readbooks-div">
+                        <h2>Read Books</h2>
+                        <ul id="readbooksmenu">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <li><button class="btn btn-outline-secondary" id="add-to-read-button">Add book to read list</button></li>
+                </div>
+            </div>
+        </div>
+        <!-- Wish List Column (col 4/4)-->
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <div class="container my-books-list" id="wishbooks-div">
+                        <h2>Wish List Books</h2>
+                        <ul id="wishlistmenu">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <li><button class="btn btn-outline-secondary" id="add-to-wish-button">Add book to wish list</button></li>
+                </div>
+            </div>
+        </div>
+
     </div>
     
+    
+    <!-- Row 2 -->
     <div class="row">
         <div class="col">
             <div class="alert alert-success" id="alert" role="alert"></div>
