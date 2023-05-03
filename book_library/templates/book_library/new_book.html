@@ -2,35 +2,53 @@
 {% load static %}
 
 {% block body %}
-<div class="container" id="new-book-form">
-    <form action="{% url 'book_library:new_book' %}" method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col">
-                {{ form.as_div }}
-            </div>
+<div class="row">
+    
+    <div class="col">
+        <div class="container" id="new-book-form">
+            <form action="{% url 'book_library:new_book' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col">
+                        {{ form }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-dark" id="add-new-book-button" type="submit">Add new book</button>
+                        </div>
+                    </div>
+                </div>
+                {% if message %}
+                <div class="row">
+                    <div class="col">
+                        <div class="container">
+                            {% if message == 'A book from the same author with the same title already exists in the database' %}
+                                <div class="alert alert-danger" role="alert">{{ message }}</div>
+                            {% else %}
+                                <div class="alert alert-success" role="alert">{{ message }}</div>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </form>
         </div>
-        <div class="row">
-            <div class="col">
-                    <button class="btn btn-outline-dark btn-block" id="add-new-book-button" type="submit">Add new book</button>
-            </div>
-        </div>
+    </div>
+
+    <div class="col">
         <div class="row">
             <div class="col">
                 <div class="container">
                     <a href="{% url 'book_library:my_books' %}">>> Return to My Books</a>
                 </div>
-                
             </div>
         </div>
-    </form>
-    {% if message %}
-    <div class="row">
-        <div class="col">
-            <div class="alert alert-success" role="alert">{{ message }}</div>
-        </div>
     </div>
-    {% endif %}
+    
 </div>
+
 {% endblock %}
 

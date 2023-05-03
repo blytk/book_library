@@ -81,7 +81,9 @@ def register(request):
 
 
 def index(request):
-    return render(request, "book_library/index.html")
+    # Redirect to my_books while I figure out what to do for the main page (maybe it will stay as my_books)
+    return HttpResponseRedirect(reverse("book_library:my_books"))
+    # return render(request, "book_library/index.html")
 
 # Should I pass the user as an argument? I am thinking maybe not, as the user will always be request.user
 # However, in order to see lists from other people, it may be necessary. I will review later.
@@ -167,12 +169,25 @@ def new_book(request):
         context = {'form': form}
         if request.method == "POST":
             form = NewBookForm(request.POST)
+            # Capture title and author entered by user
+            title = request.POST.get("title")
+            author = request.POST.get("author")
+            # Check if title and author already exist, as there can only be one unique pair title/author and it will raise an error
+            if Book.objects.filter(title=title).exists() and Book.objects.filter(author=author).exists():
+                    
+                    message = "A book from the same author with the same title already exists in the database"
+                    context = {'form': form, 'message': message}
+                    return render(request, "book_library/new_book.html", context)
+
             if form.is_valid(): 
+                print("3")
+                
                 form.save()
+                form = NewBookForm()
                 message = "Book added successfully"
                 context = {'form': form, 'message': message}
-                # return render(request, "book_library/new_book.html", context)
-                return HttpResponseRedirect(reverse("book_library:new_book"))
+                return render(request, "book_library/new_book.html", context)
+                #return HttpResponseRedirect(reverse("book_library:new_book"))
         else:
             return render(request, "book_library/new_book.html", context)
 
