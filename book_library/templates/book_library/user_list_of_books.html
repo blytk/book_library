@@ -6,32 +6,38 @@
     {% if what_list == 'all_books' %}
         <h1>All books in the database</h1>
     {% elif  what_list == 'reading_books' %}
-        <h1>Reading books for {{ request.user }}</h1>
+        <h1>Your Reading Books</h1>
     {% elif what_list == 'read_books' %}
-        <h1>Read books for {{ request.user }}</h1>
+        <h1>Your Read Books</h1>
     {% elif what_list == 'wish_books' %}
-        <h1>Wish List books for {{ request.user }}</h1>
+        <h1>Your Wish List Books</h1>
     {% endif %}
     <div class="row">
-        <div class="col"><h3>Title</h3></div>
-        <div class="col"><h3>Author</h3></div>
-        <div class="col"><h3>Genre</h3></div>
+        <div class="col col-3"><h3>Title</h3></div>
+        <div class="col col-3"><h3>Author</h3></div>
+        <div class="col col-3"><h3>Genre</h3></div>
+        <div class="col col-3"><h3>Remove?</h3></div>
     </div>
     <div class="row">
         <div class="col">
             <ul>
                 {% for book in user_list_of_books %}
                 <li>
-                    <div class="row">
+                    <div class="row element-row">
+                        {% comment %}
+                        <!-- I think I don't need the 'all_books' anymore as all_books won't be clickable from user_list_of_books -->
                         {% if what_list == 'all_books' %}
-                            <div class="col"><a href="{% url 'book_library:detail_view' request.user.id book.id %}">{{ book.title }}</a></div>
-                            <div class="col"><a href="{% url 'book_library:author_view' book.author %}">{{ book.author }}</a></div>
-                            <div class="col"><a href="{% url 'book_library:genre_view' book.genre %}">{{ book.get_genre_display }}</a></div>
+                            <div class="col col-3"><a href="{% url 'book_library:detail_view' request.user.id book.id %}">{{ book.title }}</a></div>
+                            <div class="col col-3"><a href="{% url 'book_library:author_view' book.author %}">{{ book.author }}</a></div>
+                            <div class="col col-3"><a href="{% url 'book_library:genre_view' book.genre %}">{{ book.get_genre_display }}</a></div>
                         {% else %}
-                            <div class="col"><a href="{% url 'book_library:detail_view' request.user.id book.book.id %}">{{ book.book.title }}</a></div>
-                            <div class="col"><a href="{% url 'book_library:author_view' book.book.author %}">{{ book.book.author }}</a></div>
-                            <div class="col"><a href="{% url 'book_library:genre_view' book.book.genre %}">{{ book.book.get_genre_display }}</a></div>
                         {% endif %}
+                        {% endcomment %}
+                            <div class="col col-3"><a href="{% url 'book_library:detail_view' request.user.id book.book.id %}">{{ book.book.title }}</a></div>
+                            <div class="col col-3"><a href="{% url 'book_library:author_view' book.book.author %}">{{ book.book.author }}</a></div>
+                            <div class="col col-3"><a href="{% url 'book_library:genre_view' book.book.genre %}">{{ book.book.get_genre_display }}</a></div>
+                        
+                            <div class="col col-3"><button class="btn btn-outline-danger remove-button" id="{{ book.book.id }}">Remove</button></div>
                     </div>
                 </li>
                 {% endfor %}
@@ -44,12 +50,11 @@
 
 
 
-
-
-
-
-
-
 {% block script %}
+    <script>
+        var what_list = "{{ what_list }}";
+    </script>
+    <script src="{% static 'book_library/user_list_of_books.js' %}" defer>
 
+    </script>
 {% endblock %}

@@ -13,9 +13,9 @@
             <div class="col why-col"><h3>Why?</h3></div>
         </div>
         {% for wish_object in wish_objects %}
-        <div class="row">
+        <div class="row element-row">
             <div class="col title-col"><a href="{% url 'book_library:detail_view' request.user.id wish_object.book.id %}">{{ wish_object.book.title }}</a></div>
-            <div class="col author-col">{{ wish_object.book.author }}</div>
+            <div class="col author-col"><a href="{% url 'book_library:author_view' wish_object.book.author %}">{{ wish_object.book.author }}</a></div>
             <div class="col why-col">{{ wish_object.why }}</div>
         </div>
         {% endfor %}

@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
         message.classList.add("alert-success")
         message.style.display = "block"
 
+        setTimeout(function() {
+            location.reload()},
+            2000)
+
         
         // add to reading button function
         // I am adding a book to a list, so I need to grab the book object, from the list, somehow
@@ -31,11 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
         message.classList.add("alert")
         message.classList.add("alert-primary")
         message.style.display = "block"
-        
-        
-
-        
+        setTimeout(function() {
+            location.reload()},
+            2000)
     });
+
     document.querySelector('#add-to-wish-button').addEventListener('click', function() {
         //add to wish button function
         book_id_to_send = clickedLi;
@@ -49,6 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
         message.classList.add("alert")
         message.classList.add("alert-info")
         message.style.display = "block"
+        setTimeout(function() {
+        location.reload()},
+        2000)
     });
 
     // I want to make the li items "selectable", visually and to grab it's id to pass onto the list
@@ -69,25 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }) 
     });
-
-    // Functionality for the search bar, every time we press a key, on the way up, we capture the value of the current input (string)
-    // We need to compare the value of the input field (search) and get the books that include that search string
-    // I have already all the books in HTML displaying on the page...
-    /*
-    document.querySelector('#search').addEventListener('keyup', (e) => {
-        searchString = e.target.value
-        searchString = searchString.toLowerCase()
-        filteredBooks = all_books_li.forEach(li => {
-            title = li.innerHTML
-            title = title.toLowerCase()
-            if (!title.includes(searchString)) {
-                console.log(searchString)
-                li.classList.toggle('hidden')
-            }
-        })
-        // Get all the HTML li's and only display the appropriate ones
-    })
-    */
    document.querySelector('#search').addEventListener('keyup', filter);
 })
 
@@ -113,3 +101,13 @@ function filter() {
         }
     })
 };
+
+
+function play() {
+    var audio = new Audio('/static/book_library/sounds/page-flip-4.mp3')
+    audio.play();
+};
+
+document.querySelector('#add-to-reading-button').addEventListener('click', play);
+document.querySelector('#add-to-read-button').addEventListener('click', play);
+document.querySelector('#add-to-wish-button').addEventListener('click', play);

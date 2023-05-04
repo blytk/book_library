@@ -6,13 +6,14 @@
     <!-- Row 1 -->
     <div class="row">
         <!-- All books column (col1/4) -->
-        <div class="col">
+        <div class="col col-lg-3 col-12">
             <div class="row">
                 <div class="col">
                     <div class="container" id="search-div">
-                        <h2><a href="{% url 'book_library:user_list_of_books' 'all_books' %}">All books</a></h2>
+                        {% comment %}<h2><a href="{% url 'book_library:user_list_of_books' 'all_books' %}">All books</a></h2>{% endcomment %}
+                        <h2>All books</h2>
                         <input type="search" id="search" placeholder="Search book in database"> 
-                        <button class="btn btn-outline-dark" id="search-button">Search</button>
+                        <button class="btn btn-outline-light" id="search-button">Search</button>
                         <form action="{% url 'book_library:new_book' %}">
                             <button class="btn btn-outline-success">Add new book to the database</button>
                         </form>        
@@ -21,15 +22,10 @@
             </div>
             <div class="row">
                 <div class="col">
-                    
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
                     <div class="container my-books-list" id="allbooks-div">
                         <ul id="menu">
                             {% for book in all_books %}
-                                <li id="{{ book.id }}">{{ book.title }}</li>
+                                <li class="my_books-li" id="{{ book.id }}"><span class="book-title-span">{{ book.title }}</span> <span class="book-author-span">by {{ book.author }}</span></li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -39,23 +35,23 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <div class="container">
-                                <button class="btn btn-outline-secondary" id="add-to-reading-button">Add book to reading list</button>
+                            <div class="container d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-lg" id="add-to-reading-button">Add book to reading list</button>
                             </div>
                             
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="container">
-                                <button class="btn btn-outline-secondary" id="add-to-read-button">Add book to read list</button>
+                            <div class="container d-grid gap-2">
+                                <button class="btn btn-outline-secondary btn-lg" id="add-to-read-button">Add book to read list</button>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="container">
-                                <button class="btn btn-outline-secondary" id="add-to-wish-button">Add book to wish list</button>
+                            <div class="container d-grid gap-2">
+                                <button class="btn btn-outline-success btn-lg" id="add-to-wish-button">Add book to wish list</button>
                             </div>
                         </div>
                     </div>  
@@ -64,14 +60,14 @@
         </div>        
 
         <!-- Reading List Column (col2/4) -->
-        <div class="col">
+        <div class="col col-lg-3 col-12">
             <div class="row">
                 <div class="col">
                     <div class="container not-all-books-list" id="readingbooks-div">
                         <h2><a href="{% url 'book_library:user_list_of_books' 'reading_books' %}">Reading Books</a></h2>
                         <ul id="readingbooksmenu"> 
                             {% for reading in reading_books %}
-                                <li>{{ reading.book.title }}</li>
+                                <li class="my_books-li">{{ reading.book.title }}</li>
                             {% endfor %}
                         </ul>              
                     </div>
@@ -79,14 +75,14 @@
             </div>
         </div>
         <!-- Read List Column (col3/4)-->
-        <div class="col">
+        <div class="col col-lg-3 col-12">
             <div class="row">
                 <div class="col">
                     <div class="container not-all-books-list" id="readbooks-div">
                         <h2><a href="{% url 'book_library:user_list_of_books' 'read_books' %}">Read Books</a></h2>
                         <ul id="readbooksmenu">
                             {% for read in read_books %}
-                                <li>{{ read.book.title }}</li>
+                                <li class="my_books-li">{{ read.book.title }}</li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -94,14 +90,14 @@
             </div>          
         </div>
         <!-- Wish List Column (col 4/4)-->
-        <div class="col">
+        <div class="col col-lg-3 col-12">
             <div class="row">
                 <div class="col">
                     <div class="container not-all-books-list" id="wishbooks-div">
                         <h2><a href="{% url 'book_library:user_list_of_books' 'wish_books' %}">Wish List Books</a></h2>
                         <ul id="wishlistmenu">
                             {% for wish in wish_books %}
-                                <li>{{ wish.book.title }}</li>
+                                <li class="my_books-li">{{ wish.book.title }}</li>
                             {% endfor %}
                         </ul>
                     </div>

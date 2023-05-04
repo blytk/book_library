@@ -231,9 +231,40 @@ def add_to_list(request, book_id, what_list):
 
 
 ###### REMOVE BOOKS FROM LISTS VIEWS ######### (reading, read, wish) (this is going to be used through JS in the app)
+@csrf_exempt
 def remove_from_list(request, book_id, what_list):
-    pass
+    if request.method == "POST":
+        # Capture book from the list
+        try:
+            book = Book.objects.get(pk=book_id)
+        except Book.DoesNotExist:
+            return JsonResponse({"message": "Book doesn't exist"})
+        # I have the book I need to delete, what list?
 
+        if what_list == "reading_books":
+            try:                
+                entry_to_capture = Reading.objects.get(user=request.user, book=book)
+                entry_to_capture.delete()
+                print("hello")
+            except Reading.DoesNotExist:
+                return JsonResponse({"message": "Error removing book to the list"})
+        elif what_list == "read_books":
+            try:
+                entry_to_capture = Read.objects.get(user=request.user, book=book)
+                entry_to_capture.delete()
+            except Read.DoesNotExist:
+                return JsonResponse({"message": "Error removing book to the list"})
+        elif what_list == "wish_books":
+            try:
+                entry_to_capture = Wish.objects.get(user=request.user, book=book)
+                entry_to_capture.delete()
+            except Wish.DoesNotExist:
+                return JsonResponse({"message": "Error removing book to the list"})
+        return JsonResponse({"message": "Book removed successfully"})
+    else:
+        return JsonResponse({"message": "Only POST requests allowed"})
+
+        
 
 ### DETAIL VIEW 
 def detail_view(request, user_id, book_id):

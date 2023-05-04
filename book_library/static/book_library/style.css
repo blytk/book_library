@@ -1,3 +1,26 @@
+body {
+    background-color: rgba(0, 0, 0, 0.86);
+    color:rgba(237, 240, 243, 0.918)
+    
+}
+
+
+
+h1 {
+    background-color: rgba(21, 104, 86, 0.2);
+    border: thick solid;
+    border-style: inset;
+    color: #46af65;    
+    margin-top: 25px; 
+    margin-bottom: 25px; 
+    padding: 25px;
+}
+
+h3 {
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -8,19 +31,82 @@ ul {
     margin: 10px;
 }
 
+.detail-view-note-div {
+    margin-top: 50px;
+}
+
+.element-row {
+    margin-bottom: 10px;
+}
+
+.element-row a {
+    color:rgba(33, 121, 221, 0.801)
+}
+
+
 .hidden {
     display: none;
 }
 
+.my_books-li {
+    padding: 10px;
+}
+
 .my-books-list {
-    height: 400px;
+    height: 250px;
     margin-bottom: 25px;
     margin-top: 25px;
     overflow-y: scroll;
 }
 
+.navbar, .navbar-brand {
+    font-size: 1.5em;
+}
+
+.nav-item a:hover {
+    /*opacity: 0.6;*/
+    /*background-color: #d63b3b;*/
+    background-color: rgba(0, 0, 0, 0.86);
+    color: white;
+    transition-delay: 0.075s;
+    
+}
+
 .not-all-books-list {
     margin-top: 0px;
+}
+
+.not-all-books-list li {
+    cursor: default;
+}
+
+.not-all-books-list h2, #search-div h2 {
+    margin-top: 25px;
+    border: 3px solid #000000;
+    background: rgba(11, 138, 106, 0.685);
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    cursor: pointer;
+    vertical-align: middle;
+    padding: 5px;
+    text-align: center;
+}
+
+.note {
+    margin-bottom: 25px;
+    border: 2px solid;
+}
+
+#search-div h2 {
+    cursor: default;
+}
+
+.not-all-books-list a {
+    text-decoration: none;
+    color: #7998eee0;
+}
+
+.not-all-books-list a:hover {
+    color:rgba(233, 187, 38, 0.767)
 }
 
 .visible {
@@ -28,7 +114,7 @@ ul {
 }
 
 .selected {
-    background-color: rgb(36, 187, 137);
+    background-color: rgb(72, 149, 221);
 }
 
 #add-new-book-button {
@@ -39,6 +125,14 @@ ul {
     display: none;
 }
 
+#menu li {
+    cursor: pointer;
+}
+
+#menu li:hover {
+    background-color: rgb(72, 149, 221)
+}
+
 #new-book-form {
     padding-left: 0px;
 }
@@ -46,3 +140,4 @@ ul {
 #search {
     height: 40.333px;
 }
+
