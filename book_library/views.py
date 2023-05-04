@@ -277,3 +277,21 @@ def detail_view(request, user_id, book_id):
     return render(request, "book_library/detail_view.html", context)
 
 
+def add_note(request, book_id):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST request required."}, status=400)
+    
+    # The following line I don't understand.
+    # I think I need to send to the url a json post fetch
+    data = json.loads(request.body)
+
+    new_note = Note()
+    new_note.user = request.user
+    new_note.book = Book.objects.get(pk=book_id)
+    new_note.text = data["body"] # I need to somehow include the text here in the JSON I fetch post
+    # new_note.save()
+    return JsonResponse({"message": "Note added successfulyy."}, status=201)
+
+
+
+

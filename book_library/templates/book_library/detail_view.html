@@ -12,14 +12,24 @@
             <h3>Notes from {{ current_user.username }}</h3>
             <ul>
                 {% for note in notes %}
-                    <li class="note">{{ note.text }}</li>
+                <div class="container-flex">
+                    <div class="row">
+                        <div class="col-11">
+                            <li class="note">{{ note.text }}</li>
+                        </div>    
+                        <div class="col-1">
+                            <button class="btn btn-sm btn-outline-danger">Remove</button>
+                        </div>
+                    </div>
+                </div>
+                    
                 {% endfor %}
                 {% if not notes  %}
                     NO NOTES YET
                 {% endif %}
             </ul>
             <div class="d-grid gap-2">
-                <button class="btn btn-outline-danger">Add new note +</button>
+                <button class="btn btn-outline-light" id="add-new-note-button">Add new note +</button>
             </div>
             
         </div>
@@ -33,4 +43,7 @@
 
 
 {% block script %}
+    <script src="{% static 'book_library/detail_view.js' %}" defer>
+
+    </script>
 {% endblock %}
