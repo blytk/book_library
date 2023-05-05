@@ -83,7 +83,7 @@ ul {
 .not-all-books-list h2, #search-div h2 {
     margin-top: 25px;
     border: 3px solid #000000;
-    background: rgba(11, 138, 106, 0.685);
+    background: rgb(100, 96, 95);
     box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
     cursor: pointer;
     vertical-align: middle;
@@ -102,11 +102,11 @@ ul {
 
 .not-all-books-list a {
     text-decoration: none;
-    color: #7998eee0;
+    color: #d1ddf1cb;
 }
 
 .not-all-books-list a:hover {
-    color:rgba(233, 187, 38, 0.767)
+    color:rgba(238, 99, 19, 0.925)
 }
 
 .visible {
