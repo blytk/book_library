@@ -26,15 +26,115 @@ document.addEventListener('DOMContentLoaded', function() {
         //create textarea element and set some attributes
         const newTextArea = document.createElement('textarea');
         newTextArea.setAttribute('rows', '5');
-        newTextArea.setAttribute('cols', '50');
+
         //need the parent element to replaceChild
         const elPariente = add_button.parentElement;
         elPariente.replaceChild(newTextArea, add_button)
+
+        
+        row = document.createElement('div')
+        row.setAttribute('class', 'row')
+        row.setAttribute('id', 'row-with-text-and-buttons')
+
+        col1 = document.createElement('div')
+        col1.setAttribute('class', 'col d-grid gap-2')
+        save_button = document.createElement('button')
+        save_button.setAttribute('class', 'btn btn-success')
+        save_button.setAttribute('id', 'save-button')
+        save_button.innerHTML = "Save"
+        col1.appendChild(save_button)
+
+        col2 = document.createElement('div')
+        col2.setAttribute('class', 'col d-grid gap-2')
+        cancel_button = document.createElement('button')
+        cancel_button.setAttribute('class', 'btn btn-danger')
+        cancel_button.setAttribute('id', 'cancel-button')
+        cancel_button.innerHTML = "Cancel"
+        col2.appendChild(cancel_button)
+
+        row.appendChild(col1)
+        row.appendChild(col2)
+
+        elPariente.appendChild(row)
+        /*
+        save_button = document.createElement('button')
+        save_button.setAttribute('class', 'btn btn-sm btn-light')
+        save_button.innerHTML = "Save"
+        newTextArea.after(save_button)
+        */
+
+        // Event Listeners for Save and Cancel button
+       document.querySelector('#save-button').addEventListener('click', function() {
+        console.log('save-button clicked')
+        if (newTextArea.value !== "") {
+            save();
+        }
+        
+
+       })
+       document.querySelector('#cancel-button').addEventListener('click', function() {
+        console.log('cancel-button clicked')
+        cancel();
+       })
+
+
+       function save() {
+        fetch(`/add_note/${current_book_id}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                note_text: newTextArea.value
+            })
+        }).then(() => {
+            window.location.reload();
+        })
+        
+       }
+
+
+       function cancel() {
+        // window.location.reload(); //This works but sucks as a solution and it's bad for the user as it goes back to the beginning, not good if you have many notes
+        // I have been testing a bit and it's very difficult for me at the time, I'm going to revisit this one when I feel a bit more comfortable and other stuff
+        // that it's more important has been taken care of
+        theDiv = document.querySelector('#div-to-replace')
+        newAddButton = document.createElement('button')
+        newAddButton.setAttribute('class', 'btn btn-outline-light')
+        newAddButton.setAttribute('id', 'add-new-note-button')
+        newAddButton.innerHTML = "Add new note +"
+
+        document.querySelector('#row-with-text-and-buttons').remove()
+        theDiv.replaceChild(newAddButton, newTextArea)
+        document.querySelector('#add-new-note-button').addEventListener('click', create_text_area);
+       }
     }
 
+    
     // Event listener for the add-new-note-button button (to add new notes)
     document.querySelector('#add-new-note-button').addEventListener('click', create_text_area);
 
+    // Add event listener for the remove note button (to remove each note)
+    all_remove_buttons = document.querySelectorAll('.remove-note-button')
+    
+    all_remove_buttons.forEach(function(current_remove_button) {
+        current_remove_button.addEventListener('click', function() {
+            fetch(`/remove_note/${current_remove_button.id}`, {
+                method: 'POST',
+            })
+            .then(() => {
+                window.location.reload();
+            })
+        })
+    })
+
+
+    /*    
+            fetch(`/remove_note/${button.id}`, {
+                method: 'POST',
+            })
+            .then(() => {
+                window.location.reload;
+            })
+        })
+    })
+    */
 
 })
-

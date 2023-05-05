@@ -26,5 +26,6 @@ urlpatterns = [
     path("user_list_of_books/<str:what_list>", views.user_list_of_books, name="user_list_of_books"),
     path("author_view/<str:author_name>", views.author_view, name="author_view"),
     path("genre_view/<int:genre>", views.genre_view, name="genre_view"),
-    path("add_note/<int:book_id>", views.add_note, name="add_note")
+    path("add_note/<int:book_id>", views.add_note, name="add_note"),
+    path("remove_note/<int:note_id>", views.remove_note, name="remove_note")
 ]

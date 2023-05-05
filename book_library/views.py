@@ -276,7 +276,7 @@ def detail_view(request, user_id, book_id):
     context = {'current_user': current_user, 'current_book': current_book, 'notes': notes}
     return render(request, "book_library/detail_view.html", context)
 
-
+@csrf_exempt
 def add_note(request, book_id):
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
@@ -288,10 +288,21 @@ def add_note(request, book_id):
     new_note = Note()
     new_note.user = request.user
     new_note.book = Book.objects.get(pk=book_id)
-    new_note.text = data["body"] # I need to somehow include the text here in the JSON I fetch post
-    # new_note.save()
-    return JsonResponse({"message": "Note added successfulyy."}, status=201)
+    # I need to somehow include the text here in the JSON I fetch post
+    new_note.text = data["note_text"]
+    print(new_note.text)
+    new_note.save()
+    return JsonResponse({"message": "Note added successfully."}, status=201)
 
+
+@csrf_exempt
+def remove_note(request, note_id):
+    if request.method != 'POST':
+        return JsonResponse({"error": "POST request required."}, status=400)
+    
+    note_to_remove = Note.objects.get(pk=note_id)
+    note_to_remove.delete()
+    return JsonResponse({"message": "Note removed successfully."}, status=201)
 
 
 
