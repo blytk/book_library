@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-
     // This function fetches the add_note URL, sends inside of body: the value of the #new_note_text textarea field (not created yet)(it needs to be created dynamically)
     function new_note() {
         fetch('/add_note', {
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         col1 = document.createElement('div')
         col1.setAttribute('class', 'col d-grid gap-2')
         save_button = document.createElement('button')
-        save_button.setAttribute('class', 'btn btn-success')
+        save_button.setAttribute('class', 'btn btn-outline-success blink')
         save_button.setAttribute('id', 'save-button')
         save_button.innerHTML = "Save"
         col1.appendChild(save_button)
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         col2 = document.createElement('div')
         col2.setAttribute('class', 'col d-grid gap-2')
         cancel_button = document.createElement('button')
-        cancel_button.setAttribute('class', 'btn btn-danger')
+        cancel_button.setAttribute('class', 'btn btn-outline-danger blink')
         cancel_button.setAttribute('id', 'cancel-button')
         cancel_button.innerHTML = "Cancel"
         col2.appendChild(cancel_button)
@@ -73,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
        })
        document.querySelector('#cancel-button').addEventListener('click', function() {
-        console.log('cancel-button clicked')
         cancel();
+        play_erase();
        })
 
 
@@ -104,12 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#row-with-text-and-buttons').remove()
         theDiv.replaceChild(newAddButton, newTextArea)
         document.querySelector('#add-new-note-button').addEventListener('click', create_text_area);
+        document.querySelector('#add-new-note-button').addEventListener('click', play_write);
        }
     }
 
     
     // Event listener for the add-new-note-button button (to add new notes)
     document.querySelector('#add-new-note-button').addEventListener('click', create_text_area);
+    document.querySelector('#add-new-note-button').addEventListener('click', play_write);
 
     // Add event listener for the remove note button (to remove each note)
     all_remove_buttons = document.querySelectorAll('.remove-note-button')
@@ -124,17 +125,16 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
     })
-
-
-    /*    
-            fetch(`/remove_note/${button.id}`, {
-                method: 'POST',
-            })
-            .then(() => {
-                window.location.reload;
-            })
-        })
-    })
-    */
-
 })
+
+function play_write() {
+    var audio = new Audio('/static/book_library/sounds/type-writer.mp3')
+    audio.play();
+};
+
+function play_erase() {
+    var audio = new Audio('/static/book_library/sounds/erase.mp3')
+    audio.play();
+}
+
+

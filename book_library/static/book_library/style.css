@@ -20,9 +20,6 @@ h3 {
     font-size: 2em;
 }
 @media (max-width: 800px) {
-    body {
-        font-size: 0.85em;
-    }
     h3 {
         font-size: 1.25em;
     }
@@ -129,18 +126,20 @@ ul {
 
 .not-all-books-list h2, #search-div h2 {
     margin-top: 25px;
-    border: 3px solid #000000;
+    border: 3px solid rgb(234, 225, 222);
     background: rgb(100, 96, 95);
     box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
     cursor: pointer;
     vertical-align: middle;
     padding: 5px;
     text-align: center;
+    line-height: 50px;
 }
 
 .note {
     margin-bottom: 25px;
     border: 2px solid;
+    padding: 5px;
 }
 
 #search-div h2 {
@@ -153,7 +152,7 @@ ul {
 }
 
 .not-all-books-list a:hover {
-    color:rgba(32, 33, 149, 0.93)
+    color:rgba(70, 168, 233, 0.87)
 }
 
 .visible {
@@ -187,4 +186,3 @@ ul {
 #search {
     height: 40.333px;
 }
-

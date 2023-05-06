@@ -11,7 +11,7 @@
                 <div class="col">
                     <div class="container" id="search-div">
                         {% comment %}<h2><a href="{% url 'book_library:user_list_of_books' 'all_books' %}">All books</a></h2>{% endcomment %}
-                        <h2>All books</h2>
+                        <h2><span class="float-start"></span><img src="{% static 'book_library/images/book-horizontal-stack.png' %}" height="50" width="50"></span>All books </h2>
                         <input type="search" id="search" placeholder="Search book in database"> 
                         <button class="btn btn-outline-light" id="search-button">Search</button>
                         <form action="{% url 'book_library:new_book' %}">
@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col">
                     <div class="container not-all-books-list" id="readingbooks-div">
-                        <h2><a href="{% url 'book_library:user_list_of_books' 'reading_books' %}">Reading Books</a></h2>
+                        <h2><a href="{% url 'book_library:user_list_of_books' 'reading_books' %}"><span class="float-start"><img src="{% static 'book_library/images/open-book.png' %}" height="50" width="50"></span>Reading Books</a></h2>
                         <ul id="readingbooksmenu"> 
                             {% for reading in reading_books %}
                                 <li class="my_books-li">{{ reading.book.title }}</li>
@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="col">
                     <div class="container not-all-books-list" id="readbooks-div">
-                        <h2><a href="{% url 'book_library:user_list_of_books' 'read_books' %}">Read Books</a></h2>
+                        <h2><a href="{% url 'book_library:user_list_of_books' 'read_books' %}"><span class="float-start"><img src="{% static 'book_library/images/books.png' %}" height="50" width="50"></span>Read Books</a></h2>
                         <ul id="readbooksmenu">
                             {% for read in read_books %}
                                 <li class="my_books-li">{{ read.book.title }}</li>
@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="col">
                     <div class="container not-all-books-list" id="wishbooks-div">
-                        <h2><a href="{% url 'book_library:user_list_of_books' 'wish_books' %}">Wish List Books</a></h2>
+                        <h2><a href="{% url 'book_library:user_list_of_books' 'wish_books' %}"><span class="float-start"><img src="{% static 'book_library/images/stack-of-books.png' %}" height="50" width="50"></span>Wish List Books</a></h2>
                         <ul id="wishlistmenu">
                             {% for wish in wish_books %}
                                 <li class="my_books-li">{{ wish.book.title }}</li>
