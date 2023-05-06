@@ -100,6 +100,10 @@ function filter() {
             li.classList.remove('visible');
         }
     })
+    
+
+
+
 };
 
 
@@ -111,3 +115,14 @@ function play() {
 document.querySelector('#add-to-reading-button').addEventListener('click', play);
 document.querySelector('#add-to-read-button').addEventListener('click', play);
 document.querySelector('#add-to-wish-button').addEventListener('click', play);
+
+    // Blink effect on add-to buttons (3 buttons total)
+    let allAddToButtons = document.querySelectorAll('.add-to-button')
+    allAddToButtons.forEach(addToButton => {
+        addToButton.addEventListener('mouseover', () => { 
+            addToButton.classList.add('blink');
+        })
+        addToButton.addEventListener('mouseout', () => { 
+            addToButton.classList.remove('blink');
+        })  
+    });

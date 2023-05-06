@@ -24,9 +24,7 @@
                         <img src="{% static 'book_library/images/history-book.png' %}" height="75" width="75" alt="">
                     </a>
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'book_library:my_books' %}">MY BOOKS</a>
-                            </li>
+                            
                         {% comment %}
                             {% if request.user.is_authenticated %}
                                 <li class="nav-item">
@@ -34,6 +32,11 @@
                                 </li>
                             {% endif %}
                         {% endcomment %}
+                            
+                            {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'book_library:my_books' %}">MY BOOKS</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'book_library:user_list_of_books' 'reading_books' %}">Reading</a>
                             </li>
@@ -43,7 +46,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'book_library:user_list_of_books' 'wish_books' %}">Wish List</a>
                             </li>
-                            {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'book_library:user_list_of_books' 'books_with_notes' %}">Books with Notes</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'book_library:logout' %}">Log Out</a>
                             </li>

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     })
 
-    let all_a = document.querySelectorAll('.element-row a')
+    let all_a = document.querySelectorAll('.element-row a, .remove-button')
     selected = 0
     all_a.forEach(a => {
         a.addEventListener('mouseover', () => { 

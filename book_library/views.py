@@ -88,6 +88,8 @@ def index(request):
 # Should I pass the user as an argument? I am thinking maybe not, as the user will always be request.user
 # However, in order to see lists from other people, it may be necessary. I will review later.
 
+### I've changed how the data is displayed, so I won't be using an invididual page / function for read, reading and wish list.
+"""
 def reading(request):
     # User logged in?
     if request.user.is_authenticated:
@@ -99,6 +101,7 @@ def reading(request):
         return render(request, "book_library/reading.html", context)
     else:
         return HttpResponseRedirect(reverse("book_library:login"))
+
 
 
 def read(request):
@@ -117,6 +120,7 @@ def wish_list(request):
         return render(request, "book_library/wish.html", context)
     else:
         return HttpResponseRedirect(reverse("book_library:login"))
+"""
 
 
 def my_books(request):
@@ -133,7 +137,7 @@ def my_books(request):
 
 
 def user_list_of_books(request, what_list):
-    print(what_list)
+    #print(what_list)
     if what_list == "all_books":
         user_list_of_books = Book.objects.all().order_by("title")
     elif what_list == "reading_books":
@@ -142,6 +146,11 @@ def user_list_of_books(request, what_list):
         user_list_of_books = Read.objects.filter(user=request.user)
     elif what_list == "wish_books":
         user_list_of_books = Wish.objects.filter(user=request.user)
+    elif what_list == "books_with_notes":
+        user_notes = Note.objects.filter(user=request.user)
+        user_list_of_books = Book.objects.filter(note_book__in=user_notes).distinct()
+        print(user_list_of_books)
+        
     
     context = {"user_list_of_books": user_list_of_books, "what_list": what_list}
     return render(request, "book_library/user_list_of_books.html", context)
