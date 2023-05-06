@@ -11,4 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
     })
+
+    let all_a = document.querySelectorAll('.element-row a')
+    selected = 0
+    all_a.forEach(a => {
+        a.addEventListener('mouseover', () => { 
+            a.classList.add('blink');
+        })
+        a.addEventListener('mouseout', () => { 
+            a.classList.remove('blink');
+        })  
+    });
 })

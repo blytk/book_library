@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid">
     {% if what_list == 'all_books' %}
         <h1>All books in the database</h1>
     {% elif  what_list == 'reading_books' %}
@@ -13,31 +13,39 @@
         <h1>Your Wish List Books</h1>
     {% endif %}
     <div class="row">
-        <div class="col col-3"><h3>Title</h3></div>
-        <div class="col col-3"><h3>Author</h3></div>
-        <div class="col col-3"><h3>Genre</h3></div>
-        <div class="col col-3"><h3>Remove?</h3></div>
+        <div class="col-4"><h3>Title</h3></div>
+        <div class="col"><h3>Author</h3></div>
+        <div class="col d-none d-lg-block"><h3>Genre</h3></div>
+        {% if what_list != 'wish_books' %}
+        <div class="col"><h3>Started</h3></div>
+        {% endif %}
+        <div class="col"><h3>Remove</h3></div>
     </div>
     <div class="row">
         <div class="col">
             <ul>
                 {% for book in user_list_of_books %}
                 <li>
-                    <div class="row element-row">
+                    <div class="row element-row align-items-center">
                         {% comment %}
                         <!-- I think I don't need the 'all_books' anymore as all_books won't be clickable from user_list_of_books -->
                         {% if what_list == 'all_books' %}
                             <div class="col col-3"><a href="{% url 'book_library:detail_view' request.user.id book.id %}">{{ book.title }}</a></div>
                             <div class="col col-3"><a href="{% url 'book_library:author_view' book.author %}">{{ book.author }}</a></div>
                             <div class="col col-3"><a href="{% url 'book_library:genre_view' book.genre %}">{{ book.get_genre_display }}</a></div>
+                            
                         {% else %}
                         {% endif %}
                         {% endcomment %}
-                            <div class="col col-3"><a href="{% url 'book_library:detail_view' request.user.id book.book.id %}">{{ book.book.title }}</a></div>
-                            <div class="col col-3"><a href="{% url 'book_library:author_view' book.book.author %}">{{ book.book.author }}</a></div>
-                            <div class="col col-3"><a href="{% url 'book_library:genre_view' book.book.genre %}">{{ book.book.get_genre_display }}</a></div>
-                        
-                            <div class="col col-3"><button class="btn btn-outline-danger remove-button" id="{{ book.book.id }}">Remove</button></div>
+                            <div class="col-4"><a href="{% url 'book_library:detail_view' request.user.id book.book.id %}">{{ book.book.title }}</a></div>
+                            <div class="col"><a href="{% url 'book_library:author_view' book.book.author %}">{{ book.book.author }}</a></div>
+                            <div class="col d-none d-lg-block"><a href="{% url 'book_library:genre_view' book.book.genre %}">{{ book.book.get_genre_display }}</a></div>
+                            
+                            {% if what_list != 'wish_books' %}
+                            <div class="col">{{ book.started_reading }}</div>
+                            {% endif %}
+
+                            <div class="col"><button class="btn btn-outline-danger remove-button" id="{{ book.book.id }}">Remove</button></div>
                     </div>
                 </li>
                 {% endfor %}

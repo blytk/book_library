@@ -61,7 +61,7 @@ class Reading(models.Model):
     user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE, related_name="reading_user")
     book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name="reading_book")
     why = models.TextField(blank=True, null=True, max_length=1024)
-    started_reading = models.DateField(blank=True, null=True)
+    started_reading = models.DateField(blank=True, null=True, auto_now_add=True)
     recommend = models.BooleanField(blank=True, null=True)
 
     class Meta:

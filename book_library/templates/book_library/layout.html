@@ -27,19 +27,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'book_library:my_books' %}">MY BOOKS</a>
                             </li>
+                        {% comment %}
                             {% if request.user.is_authenticated %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="#"><strong>{{ request.user }}</strong></a>
                                 </li>
                             {% endif %}
+                        {% endcomment %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'book_library:reading' %}">Reading</a>
+                                <a class="nav-link" href="{% url 'book_library:user_list_of_books' 'reading_books' %}">Reading</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'book_library:read' %}">Read</a>
+                                <a class="nav-link" href="{% url 'book_library:user_list_of_books' 'read_books' %}">Read</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'book_library:wish' %}">Wish List</a>
+                                <a class="nav-link" href="{% url 'book_library:user_list_of_books' 'wish_books' %}">Wish List</a>
                             </li>
                             {% if request.user.is_authenticated %}
                             <li class="nav-item">
