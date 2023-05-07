@@ -79,7 +79,6 @@ def register(request):
 # End of user related views
 #####################################################################################################################################################################
 
-@login_required
 def index(request):
     # Redirect to my_books while I figure out what to do for the main page (maybe it will stay as my_books)
     return HttpResponseRedirect(reverse("book_library:my_books"))
@@ -122,7 +121,6 @@ def wish_list(request):
         return HttpResponseRedirect(reverse("book_library:login"))
 """
 
-@login_required
 def my_books(request):
     if request.user.is_authenticated:
         all_books = Book.objects.all().order_by("title")

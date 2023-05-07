@@ -92,6 +92,14 @@ ul {
     display: none;
 }
 
+.login-container {
+    margin-top: 50px;
+}
+
+.form-control {
+    margin-bottom: 25px;
+}
+
 .my_books-li {
     padding: 10px;
 }
@@ -178,6 +186,13 @@ ul {
     text-decoration: none;
     color: white;
 }
+
+#login-button, #register-button {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+
 
 #menu li {
     cursor: pointer;

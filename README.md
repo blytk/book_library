@@ -32,7 +32,7 @@ However, at this point, it just feels unnecessary. I don't think it would be a t
         a new book in the database.
         - If the book we want to assign to one of our lists already exists in our database, we can search for it, click on it (it will be highlighted on the list),
         and press the appropriate button (one button for each list we want to add the book to (reading, read and wish lit))
-        - Books can only be selected one by one.
+        - Books can only be selected one by one
     2. Reading Books (clickable link):
         - Here we can see at a glance all books included in our current reading list
         - If we click on the header, we will be redirected to a page with a bit more of detail, where we can access each of the books to see its notes, remove it from the list, see other books in the database from the author or browse by genre.
@@ -40,7 +40,9 @@ However, at this point, it just feels unnecessary. I don't think it would be a t
         - Same as Reading Books, but for books already read.
     4. Wish List Books (clickable link):
         - Same as Reading Books, but for books we intend to read in the future.
-        
+    
+    The navbar includes an additional page "Books with Notes", where the user can access a list, similar to the other lists, but with all the books they have added notes for.
+
 ### Models
 
 1. *User* 

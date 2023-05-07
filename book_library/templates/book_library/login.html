@@ -2,23 +2,29 @@
 
 {% block body %}
 
-    <h2>Login</h2>
+    <div class="container login-container">
+        <h2>Login</h2>
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
+        {% if message %}
+            <div>{{ message }}</div>
+        {% endif %}
+    </div>
+    
 
-    <form action="{% url 'book_library:login' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
-        </div>
-        <input class="btn btn-outline-light" type="submit" value="Login">
-    </form>
+    <div class="container login-container">
+        <form action="{% url 'book_library:login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <input class="btn btn-outline-light btn-lg" id="login-button" type="submit" value="Login">
+        </form>
 
-    If you don't have an account yet, you can <a href="{% url 'book_library:register' %}">register here.</a>
+        
+    If you don't have an account yet, you can<a href="{% url 'book_library:register' %}">register here.</a>
+    </div>
 
 {% endblock %}
