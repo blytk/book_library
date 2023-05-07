@@ -13,7 +13,7 @@
                         {% comment %}<h2><a href="{% url 'book_library:user_list_of_books' 'all_books' %}">All books</a></h2>{% endcomment %}
                         <h2><span class="float-start"></span><img src="{% static 'book_library/images/book-horizontal-stack.png' %}" height="50" width="50"></span>All books </h2>
                         <input type="search" id="search" placeholder="Search book in database"> 
-                        <button class="btn btn-outline-light" id="search-button">Search</button>
+                        {% comment %}<button class="btn btn-outline-light" id="search-button">Search</button>{% endcomment %}
                         <form action="{% url 'book_library:new_book' %}">
                             <button class="btn btn-outline-success">Add new book to the database</button>
                         </form>        

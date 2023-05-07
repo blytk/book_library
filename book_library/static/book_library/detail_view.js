@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //create textarea element and set some attributes
         const newTextArea = document.createElement('textarea');
         newTextArea.setAttribute('rows', '5');
+        
 
         //need the parent element to replaceChild
         const elPariente = add_button.parentElement;
@@ -105,6 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#add-new-note-button').addEventListener('click', create_text_area);
         document.querySelector('#add-new-note-button').addEventListener('click', play_write);
        }
+       newTextArea.focus();
+       document.querySelector('#div-to-replace').scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
 
     

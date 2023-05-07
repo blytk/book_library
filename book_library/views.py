@@ -79,7 +79,7 @@ def register(request):
 # End of user related views
 #####################################################################################################################################################################
 
-
+@login_required
 def index(request):
     # Redirect to my_books while I figure out what to do for the main page (maybe it will stay as my_books)
     return HttpResponseRedirect(reverse("book_library:my_books"))
@@ -122,7 +122,7 @@ def wish_list(request):
         return HttpResponseRedirect(reverse("book_library:login"))
 """
 
-
+@login_required
 def my_books(request):
     if request.user.is_authenticated:
         all_books = Book.objects.all().order_by("title")
@@ -171,7 +171,7 @@ def genre_view(request, genre):
 
 
 #### ADD NEW BOOK
-
+@login_required
 def new_book(request):
         # Create new book element
         form = NewBookForm()
@@ -206,6 +206,7 @@ def new_book(request):
 # a third argument
 
 ###### ADD BOOKS TO LISTS VIEWS ######### (reading, read, wish) (this is going to be used through JS in the app)
+@login_required
 @csrf_exempt
 def add_to_list(request, book_id, what_list):
     if request.method == "POST":
@@ -240,6 +241,7 @@ def add_to_list(request, book_id, what_list):
 
 
 ###### REMOVE BOOKS FROM LISTS VIEWS ######### (reading, read, wish) (this is going to be used through JS in the app)
+@login_required
 @csrf_exempt
 def remove_from_list(request, book_id, what_list):
     if request.method == "POST":
@@ -276,6 +278,7 @@ def remove_from_list(request, book_id, what_list):
         
 
 ### DETAIL VIEW 
+@login_required
 def detail_view(request, user_id, book_id):
     # We get the user we what (from url) and the book we want (from url too)
     current_user = User.objects.get(id=user_id)
@@ -285,6 +288,7 @@ def detail_view(request, user_id, book_id):
     context = {'current_user': current_user, 'current_book': current_book, 'notes': notes}
     return render(request, "book_library/detail_view.html", context)
 
+@login_required
 @csrf_exempt
 def add_note(request, book_id):
     if request.method != "POST":
@@ -303,7 +307,7 @@ def add_note(request, book_id):
     new_note.save()
     return JsonResponse({"message": "Note added successfully."}, status=201)
 
-
+@login_required
 @csrf_exempt
 def remove_note(request, note_id):
     if request.method != 'POST':
@@ -315,6 +319,7 @@ def remove_note(request, note_id):
 
 
 # Generate .txt file with notes (book title and author on top)
+@login_required
 def notes_text(request, book_id):
     response = HttpResponse(content_type='text/plain')
     response['Content-Disposition'] = 'attachment; filename=notes.txt'

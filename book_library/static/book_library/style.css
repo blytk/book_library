@@ -23,6 +23,7 @@ h3 {
     h3 {
         font-size: 1.25em;
     }
+    
 }
 
 ul {
@@ -190,6 +191,22 @@ ul {
     padding-left: 0px;
 }
 
+#row-with-text-and-buttons {
+    margin-bottom: 50px;
+}
+
+/* I want to display an X instead of "Remove" on the button, for smaller screens */
+.remove-note-button:before {
+    content: 'Remove';
+}
+
+@media screen and (max-width: 800px) {
+    .remove-note-button:before {
+        content: 'X';
+    }
+}
+
 #search {
     height: 40.333px;
+    width: 80%;
 }

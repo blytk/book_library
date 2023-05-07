@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // I don't know how to make only one item selectable simultaneously. Maybe I make it work as a list? Better experience actually
     // I am going to get started with just one item selected, as the view function expects a single book id
     // I might review later to see if I can make it work with a list and it's better overall
+    /*
     let all_books_li = document.querySelectorAll('#allbooks-div li')
     selected = 0
     all_books_li.forEach(li => {
@@ -76,6 +77,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }) 
     });
+    */
+   let all_books_li = document.querySelectorAll('#allbooks-div li')
+    all_books_li.forEach(li => {
+        li.addEventListener('click', () => {
+            all_books_li.forEach(li => {
+                li.classList.remove('selected');
+            })
+            li.classList.add('selected');
+            clickedLi = li.id
+        })
+    })
+
    document.querySelector('#search').addEventListener('keyup', filter);
 })
 
