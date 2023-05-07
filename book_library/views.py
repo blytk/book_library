@@ -314,4 +314,21 @@ def remove_note(request, note_id):
     return JsonResponse({"message": "Note removed successfully."}, status=201)
 
 
+# Generate .txt file with notes (book title and author on top)
+def notes_text(request, book_id):
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=notes.txt'
+    
+    notes = Note.objects.filter(user=request.user, book=book_id)
+    current_book = Book.objects.get(pk=book_id)
+    title = current_book.title
+    author = current_book.author
+    first_line = f"{title}, {author}\n\n"
 
+    lines = [first_line]
+    
+    for note in notes:
+        lines.append(note.text + "\n\n")
+    # Write to txt file
+    response.writelines(lines)
+    return response

@@ -27,5 +27,8 @@ urlpatterns = [
     path("author_view/<str:author_name>", views.author_view, name="author_view"),
     path("genre_view/<int:genre>", views.genre_view, name="genre_view"),
     path("add_note/<int:book_id>", views.add_note, name="add_note"),
-    path("remove_note/<int:note_id>", views.remove_note, name="remove_note")
+    path("remove_note/<int:note_id>", views.remove_note, name="remove_note"),
+    # generate a .txt file (for notes on book)
+    path('notes_text/<int:book_id>', views.notes_text, name="notes_text"),
+
 ]

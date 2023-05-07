@@ -11,6 +11,9 @@
         </div>
         <div class="col-9">
             <h3>Notes from {{ current_user.username }}</h3>
+            <button class="btn btn-sm btn-outline-info download-button" id="download-button">
+                <a href="{% url 'book_library:notes_text' current_book.id %}">Download</a>
+            </button>
             <ul>
                 {% for note in notes %}
                 <div class="container-flex">

@@ -25,6 +25,12 @@ h3 {
     }
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 .element-row {
     border: 1px white solid;
     padding-top: 35px;
@@ -65,20 +71,16 @@ h3 {
     }
 }
 
-
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
 .container > * {
     margin: 10px;
 }
 
 .detail-view-note-div {
     margin-top: 50px;
+}
+
+.download-button {
+    margin-bottom: 25px;
 }
 
 .element-row {
@@ -169,6 +171,11 @@ ul {
 
 #alert {
     display: none;
+}
+
+#download-button a{
+    text-decoration: none;
+    color: white;
 }
 
 #menu li {

@@ -125,6 +125,20 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
     })
+
+    let allButtons = document.querySelectorAll('button')
+    allButtons.forEach(_button => {
+        _button.addEventListener('mouseover', () => { 
+            _button.classList.add('blink');
+        })
+        _button.addEventListener('mouseout', () => { 
+            _button.classList.remove('blink');
+        })  
+    });
+
+    // Download button should allow user to download all notes in a formatted way (.txt for starters)
+    // document.querySelector('#download-button').addEventListener('click', download_notes)
+
 })
 
 function play_write() {
@@ -137,4 +151,8 @@ function play_erase() {
     audio.play();
 }
 
-
+/*
+function download() {
+    pass
+}
+*/
