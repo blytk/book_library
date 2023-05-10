@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
         removeButton.addEventListener('click', function() {             
             fetch(`/remove_from_list/${removeButton.id}/${what_list}`, {
                 method: 'POST'
-            }).then(() => {
-                window.location.reload();
             })
         })
     })
 
+
+
+
     let all_a = document.querySelectorAll('.element-row a, .remove-button')
-    selected = 0
     all_a.forEach(a => {
         a.addEventListener('mouseover', () => { 
             a.classList.add('blink');
@@ -22,4 +22,15 @@ document.addEventListener('DOMContentLoaded', function() {
             a.classList.remove('blink');
         })  
     });
+
+    removeButtons.forEach(removeButton => {
+        removeButton.addEventListener('click', () => {
+            removeButton.parentElement.parentElement.classList.add('hide');
+            removeButton.parentElement.parentElement.style.animationPlayState = 'running';
+            removeButton.parentElement.parentElement.addEventListener('animationend', () => {
+                removeButton.parentElement.parentElement.remove();
+            })
+        })
+    })
+    
 })

@@ -22,7 +22,7 @@ I've added some functionality on the front-end using javascript (not included in
 I've implemented a small functionality that allows the user to download .txt files, based on database queries (the user can download its notes for each book)
 
 It's worth mentioning that, when first designing the project, I intended on adding some social features: being able to see other users lists of books or notes of books...
-However, at this point, it just feels unnecessary. I don't think it would be a terrible idea to add, but would this be a live application, probably nobody would use that functionality. I feel like this is a finished product, and I would like to submit it as it is. I read often and, when taking notes for many different books, as time goes by, it can become difficult to keep track of all the notes for all the different books we have read over the years. So the target user for the app would be people like me: people that like to read books, take notes and have easy access to them, all in the same place.
+However, at this point, it just feels unnecessary. I don't think it would be a terrible idea to add, but would this be a live application, probably nobody would use that functionality. I decided to stop here, as I feel like this is a finished product, and I would like to submit it as it is. I read often and, when taking notes for many different books, as time goes by, it can become difficult to keep track of all the notes for all the different books we have read over the years. So the target user for the app would be people like me: people that like to read books, take notes and have easy access to them, all in the same place.
 
 ### How to use the app
 - There are 4 sections in the main panel (my books):

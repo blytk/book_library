@@ -12,14 +12,25 @@ document.addEventListener('DOMContentLoaded', function() {
         message.classList.add("alert-success")
         message.style.display = "block"
 
-        setTimeout(function() {
-            location.reload()},
-            2000)
+        // I get the li element I want to add, I clone it to not modify the original, append it into the appropriate list
+        selected_book = document.querySelector('.selected')        
+        var selectedBookClone = selected_book.cloneNode(true)
+        selectedBookClone.textContent = selected_book.querySelector('.book-title-span').textContent
+        selectedBookClone.classList.remove("selected")
 
+        // I need to check that the element is not already on the list, this doesn't affect the database but it looks bad (adds same title more than once if clicked more)
+        var checkLiNodeList = document.querySelectorAll('#readingbooksmenu li')
         
-        // add to reading button function
-        // I am adding a book to a list, so I need to grab the book object, from the list, somehow
-        // HOOW????? When I click the item, I can grab book id, and operate with the id
+        already_exists = false;
+        checkLiNodeList.forEach(node => {
+            if (node.textContent === selectedBookClone.textContent) {
+                already_exists = true;
+            }
+        })
+
+        if (already_exists === false) {
+            document.querySelector('#readingbooksmenu').append(selectedBookClone)
+        }
         
     });
     document.querySelector('#add-to-read-button').addEventListener('click', function() {
@@ -35,9 +46,27 @@ document.addEventListener('DOMContentLoaded', function() {
         message.classList.add("alert")
         message.classList.add("alert-primary")
         message.style.display = "block"
-        setTimeout(function() {
-            location.reload()},
-            2000)
+        
+
+        // I get the li element I want to add, I clone it to not modify the original, append it into the appropriate list
+        selected_book = document.querySelector('.selected')        
+        var selectedBookClone = selected_book.cloneNode(true)
+        selectedBookClone.textContent = selected_book.querySelector('.book-title-span').textContent
+        selectedBookClone.classList.remove("selected")
+
+        // I need to check that the element is not already on the list, this doesn't affect the database but it looks bad (adds same title more than once if clicked more)
+        var checkLiNodeList = document.querySelectorAll('#readbooksmenu li')
+        
+        already_exists = false;
+        checkLiNodeList.forEach(node => {
+            if (node.textContent === selectedBookClone.textContent) {
+                already_exists = true;
+            }
+        })
+
+        if (already_exists === false) {
+            document.querySelector('#readbooksmenu').append(selectedBookClone)
+        }
     });
 
     document.querySelector('#add-to-wish-button').addEventListener('click', function() {
@@ -53,9 +82,26 @@ document.addEventListener('DOMContentLoaded', function() {
         message.classList.add("alert")
         message.classList.add("alert-info")
         message.style.display = "block"
-        setTimeout(function() {
-        location.reload()},
-        2000)
+        
+        // I get the li element I want to add, I clone it to not modify the original, append it into the appropriate list
+        selected_book = document.querySelector('.selected')        
+        var selectedBookClone = selected_book.cloneNode(true)
+        selectedBookClone.textContent = selected_book.querySelector('.book-title-span').textContent
+        selectedBookClone.classList.remove("selected")
+
+        // I need to check that the element is not already on the list, this doesn't affect the database but it looks bad (adds same title more than once if clicked more)
+        var checkLiNodeList = document.querySelectorAll('#wishlistmenu li')
+        
+        already_exists = false;
+        checkLiNodeList.forEach(node => {
+            if (node.textContent === selectedBookClone.textContent) {
+                already_exists = true;
+            }
+        })
+
+        if (already_exists === false) {
+            document.querySelector('#wishlistmenu').append(selectedBookClone)
+        }
     });
 
     // I want to make the li items "selectable", visually and to grab it's id to pass onto the list

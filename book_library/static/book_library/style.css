@@ -1,6 +1,6 @@
 body {
     background-color: rgba(0, 0, 0, 0.86);
-    color:rgba(237, 240, 243, 0.918)
+    color:rgba(237, 240, 243, 0.918);
 }
 
 
@@ -164,6 +164,39 @@ ul {
 
 .not-all-books-list a:hover {
     color:rgba(70, 168, 233, 0.87)
+}
+
+/*  Testing stuff */
+@keyframes hide {
+    0% {
+        opacity: 1;
+        height: 100%;
+        line-height: 100%; 
+        margin-bottom: 10px;
+    }
+    75% {
+        opacity: 0;
+        line-height: 50%;
+        height: 100%;
+        margin-bottom: 2.5px;
+        margin-top: 2.5px;
+    }
+    100% {
+        opacity: 0;
+        height: 0px;
+        line-height: 0px;
+        padding: 0px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+}
+
+.hide {
+    animation-name: hide;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
 }
 
 .visible {
