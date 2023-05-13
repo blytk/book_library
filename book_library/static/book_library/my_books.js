@@ -1,16 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#add-to-reading-button').addEventListener('click', function() {
         book_id_to_send = clickedLi;
-        // I need to post the url "my_books/add_to_reading_list/<int:book_id>" that will trigger the view add_to_reading_list(request, book_id)
-        fetch(`add_to_list/${book_id_to_send}/reading_list`, {
-            method: 'POST',
-        })
-        message = document.querySelector('#alert')
-        message.innerHTML = "Book successfully added to reading list"
-        message.className = ""
-        message.classList.add("alert")
-        message.classList.add("alert-success")
-        message.style.display = "block"
+        
+        
 
         // I get the li element I want to add, I clone it to not modify the original, append it into the appropriate list
         selected_book = document.querySelector('.selected')        
@@ -30,22 +22,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (already_exists === false) {
             document.querySelector('#readingbooksmenu').append(selectedBookClone)
+            // I need to post the url "my_books/add_to_reading_list/<int:book_id>" that will trigger the view add_to_reading_list(request, book_id)
+            // I've moved the fetch to after the JS checks whether the book is already in the list, no need to post to the server otherwise
+            fetch(`add_to_list/${book_id_to_send}/reading_list`, {
+                method: 'POST',
+            }).then(() => {
+                document.querySelector('#add-to-reading-button').innerHTML = "Book successfully added to reading list"
+                setTimeout(function() {
+                    document.querySelector('#add-to-reading-button').innerHTML = "Add Book to Reading List"    
+                }, 5000)
+            })
+            
+            /*
+            message = document.querySelector('#alert')
+            message.innerHTML = "Book successfully added to reading list"
+            message.className = ""
+            message.classList.add("alert")
+            message.classList.add("alert-success")
+            message.style.display = "block"
+            */
         }
+
+        
         
     });
     document.querySelector('#add-to-read-button').addEventListener('click', function() {
         //add to read button function
         book_id_to_send = clickedLi;
-        fetch(`add_to_list/${book_id_to_send}/read_list`, {
-            method: 'POST',
-        })
-
-        message = document.querySelector('#alert')
-        message.innerHTML = "Book successfully added to read list"
-        message.className = ""
-        message.classList.add("alert")
-        message.classList.add("alert-primary")
-        message.style.display = "block"
+        
         
 
         // I get the li element I want to add, I clone it to not modify the original, append it into the appropriate list
@@ -66,22 +70,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (already_exists === false) {
             document.querySelector('#readbooksmenu').append(selectedBookClone)
+            fetch(`add_to_list/${book_id_to_send}/read_list`, {
+                method: 'POST',
+            }).then(() => {
+                document.querySelector('#add-to-read-button').innerHTML = "Book successfully added to reading list"
+                setTimeout(function() {
+                    document.querySelector('#add-to-read-button').innerHTML = "Add Book to Reading List"    
+                }, 5000)
+            })
+    
+            message = document.querySelector('#alert')
+            message.innerHTML = "Book successfully added to read list"
+            message.className = ""
+            message.classList.add("alert")
+            message.classList.add("alert-primary")
+            message.style.display = "block"
         }
     });
 
     document.querySelector('#add-to-wish-button').addEventListener('click', function() {
         //add to wish button function
         book_id_to_send = clickedLi;
-        fetch(`add_to_list/${book_id_to_send}/wish_list`, {
-            method: 'POST',
-        })
-
-        message = document.querySelector('#alert')
-        message.innerHTML = "Book successfully added to wish list"
-        message.className = ""
-        message.classList.add("alert")
-        message.classList.add("alert-info")
-        message.style.display = "block"
+        
         
         // I get the li element I want to add, I clone it to not modify the original, append it into the appropriate list
         selected_book = document.querySelector('.selected')        
@@ -101,6 +111,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (already_exists === false) {
             document.querySelector('#wishlistmenu').append(selectedBookClone)
+            fetch(`add_to_list/${book_id_to_send}/wish_list`, {
+            method: 'POST',
+        }).then(() => {
+            document.querySelector('#add-to-wish-button').innerHTML = "Book successfully added to reading list"
+            setTimeout(function() {
+                document.querySelector('#add-to-wish-button').innerHTML = "Add Book to Reading List"    
+            }, 5000)
+        })
+
+        message = document.querySelector('#alert')
+        message.innerHTML = "Book successfully added to wish list"
+        message.className = ""
+        message.classList.add("alert")
+        message.classList.add("alert-info")
+        message.style.display = "block"
         }
     });
 

@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col">
                 {% for book in books_by_genre %}
-                    <li class="book-row"><a href="{% url 'book_library:detail_view' request.user.id book.id %}">{{ book.title }}</a></li>
+                    <li class="book-row"><a href="{% url 'book_library:detail_view' request.user.id book.id %}">{{ book.title }} by {{ book.author }}</a></li>
                     
                 {% endfor %}
             </div>
